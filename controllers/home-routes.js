@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
         'post_url',
         'title',
         'created_at',
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
       ],
+      // linking comments to post
       include: [
         {
           model: Comment,
@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
         }
       ]
     })
+    // looping through avaiable posts
       .then(dbPostData => {
         console.log(dbPostData[0]);
         //mapping all the posts
@@ -48,7 +49,7 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-
+  // pushing to home page
   res.render('homepage', {
     posts,
     loggedIn: req.session.loggedIn
@@ -66,9 +67,9 @@ router.get('/post/:id', (req, res) => {
       'post_url',
       'title',
       'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
     include: [
+      // linking comments with user. 
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
@@ -83,6 +84,7 @@ router.get('/post/:id', (req, res) => {
       }
     ]
   })
+  // validating 
     .then(dbPostData => {
       if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });

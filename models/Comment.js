@@ -10,12 +10,14 @@ class Comment extends Model {}
 // creating first comment instance
 Comment.init(
     {
+      // setting id
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
       },
+      // setting text
       comment_text: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -23,6 +25,7 @@ Comment.init(
           len: [1]
         }
       },
+        // setting id
       user_id: {
         type: DataTypes.INTEGER,
         references: {
@@ -30,6 +33,7 @@ Comment.init(
           key: 'id'
         }
       },
+      // setting post id
       post_id: {
         type: DataTypes.INTEGER,
         references: {

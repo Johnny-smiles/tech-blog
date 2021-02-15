@@ -1,7 +1,5 @@
 // linking router
 const router = require('express').Router();
-// linking sequelize package
-const sequelize = require('../config/connection');
 // linking models 
 const { Post, User, Comment } = require('../models');
 // linking auth gaurd property
@@ -19,7 +17,6 @@ router.get('/', withAuth, (req, res) => {
         'post_url',
         'title',
         'created_at',
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
       ],
       include: [
         {

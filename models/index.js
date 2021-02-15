@@ -21,20 +21,22 @@ Post.belongsToMany(User, {
     foreignKey: 'post_id'
   });
 
-  // creating associations 
-
+  // creating associations between comments and user
   Comment.belongsTo(User, {
     foreignKey: 'user_id'
   });
   
+  // creating associations between comments and post
   Comment.belongsTo(Post, {
     foreignKey: 'post_id'
   });
   
+  // creating association between user and comment 
   User.hasMany(Comment, {
     foreignKey: 'user_id'
   });
   
+  // creating associtaion between comment and post 
   Post.hasMany(Comment, {
     foreignKey: 'post_id'
   });

@@ -1,5 +1,8 @@
+// linkiing sequlize model 
 const { Model, DataTypes } = require('sequelize');
+// linking bcrypt
 const bcrypt = require('bcrypt');
+// extending sequelize connection
 const sequelize = require('../config/connection');
 
 
@@ -14,16 +17,19 @@ class User extends Model {
 // define table columns and configuration
 User.init(
   {
+    // setting id
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
+    // setting username
     username: {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // setting email
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,9 +38,11 @@ User.init(
         isEmail: true
       }
     },
+    // setting pasword 
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      // requiring min length
       validate: {
         len: [4]
       }
